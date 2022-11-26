@@ -3,11 +3,6 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import * as dat from "dat.gui";
 
-// Loading
-const textureLoader = new THREE.TextureLoader();
-
-const normalTexture = textureLoader.load("/textures/NormalMap-golf.png");
-
 // Debug
 const gui = new dat.GUI();
 
@@ -18,15 +13,12 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 
 // Objects
-const geometry = new THREE.SphereBufferGeometry(0.5, 64, 64);
+const geometry = new THREE.TorusGeometry(0.7, 0.2, 16, 100);
 
 // Materials
 
-const material = new THREE.MeshStandardMaterial();
-material.metalness = 0.7;
-material.roughness = 0.2;
-material.normalMap = normalTexture;
-material.color = new THREE.Color(0x292929);
+const material = new THREE.MeshBasicMaterial();
+material.color = new THREE.Color(0xff0000);
 
 // Mesh
 const sphere = new THREE.Mesh(geometry, material);
@@ -39,28 +31,6 @@ pointLight.position.x = 2;
 pointLight.position.y = 3;
 pointLight.position.z = 4;
 scene.add(pointLight);
-
-const pointLight2 = new THREE.PointLight(0xff0000, 2);
-// pointLight.position.x = 2;
-// pointLight.position.y = 3;
-// pointLight.position.z = 4;
-pointLight2.position.set(1, 2, 1);
-pointLight2.intensity = 1;
-
-scene.add(pointLight2);
-
-const pointLight3 = new THREE.PointLight(0x0000ff, 2);
-// pointLight.position.x = 2;
-// pointLight.position.y = 3;
-// pointLight.position.z = 4;
-pointLight3.position.set(1, -2, 1);
-pointLight3.intensity = 1;
-
-scene.add(pointLight3);
-
-gui.add(pointLight2.position, "x").min(-3).max(3).step(0.01);
-gui.add(pointLight2.position, "y").min(-3).max(3).step(0.01);
-gui.add(pointLight2.position, "z").min(-3).max(3).step(0.01);
 
 /**
  * Sizes
@@ -108,8 +78,6 @@ scene.add(camera);
  */
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
-  // makes the background of the canvas transparent when alpha is true
-  alpha: true,
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
