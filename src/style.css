@@ -25,11 +25,18 @@ body {
 }
 
 h1 {
-  font-size: 8rem;
+  font-size: 6rem;
   text-transform: uppercase;
   color: white;
   text-align: center;
 }
+h2 {
+  font-size: 4rem;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+}
+
 section {
   height: 100vh;
 }
